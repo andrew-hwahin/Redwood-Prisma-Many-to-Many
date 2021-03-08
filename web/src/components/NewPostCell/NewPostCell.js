@@ -2,7 +2,14 @@ import { useMutation, useFlash } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 import PostForm from 'src/components/PostForm'
 
-import { QUERY } from 'src/components/PostsCell'
+export const QUERY = gql`
+  query TAGS {
+    tags {
+      id
+      name
+    }
+  }
+`
 
 const CREATE_POST_MUTATION = gql`
   mutation CreatePostMutation($input: CreatePostInput!) {
@@ -12,7 +19,7 @@ const CREATE_POST_MUTATION = gql`
   }
 `
 
-const NewPost = () => {
+export const Success = ({ tags }) => {
   const { addMessage } = useFlash()
   const [createPost, { loading, error }] = useMutation(CREATE_POST_MUTATION, {
     onCompleted: () => {
@@ -21,7 +28,8 @@ const NewPost = () => {
     },
   })
 
-  const onSave = (input) => {
+  const onSave = (form) => {
+    const input = { ...form, tags: form.tags.map((tag) => parseInt(tag)) }
     createPost({ variables: { input } })
   }
 
@@ -31,10 +39,8 @@ const NewPost = () => {
         <h2 className="rw-heading rw-heading-secondary">New Post</h2>
       </header>
       <div className="rw-segment-main">
-        <PostForm onSave={onSave} loading={loading} error={error} />
+        <PostForm onSave={onSave} loading={loading} error={error} tags={tags} />
       </div>
     </div>
   )
 }
-
-export default NewPost

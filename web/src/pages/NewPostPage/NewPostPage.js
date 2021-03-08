@@ -1,10 +1,10 @@
 import PostsLayout from 'src/layouts/PostsLayout'
-import NewPost from 'src/components/NewPost'
+import NewPostCell from 'src/components/NewPostCell'
 
 const NewPostPage = () => {
   return (
     <PostsLayout>
-      <NewPost />
+      <NewPostCell />
     </PostsLayout>
   )
 }

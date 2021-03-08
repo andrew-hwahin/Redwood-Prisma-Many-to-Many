@@ -12,6 +12,7 @@ export const schema = gql`
 
   input CreatePostInput {
     title: String!
+    tags: [Int]
   }
 
   input UpdatePostInput {
