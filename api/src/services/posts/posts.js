@@ -13,7 +13,7 @@ export const post = ({ id }) => {
 export const createPost = ({ input }) => {
   const data = {
     title: input.title,
-    tags: input.tags.map((id) => ({ id })),
+    tags: { set: input.tags.map((id) => ({ id })) },
   }
 
   return db.post.create({
