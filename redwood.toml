@@ -7,7 +7,7 @@
 
 [web]
   port = 8912
-  apiProxyPath = "/.redwood/functions"
+  apiProxyPath = "/api"
 [api]
   port = 8913
   schemaPath = "./api/db/schema.prisma"
